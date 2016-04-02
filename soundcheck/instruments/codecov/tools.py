@@ -3,6 +3,7 @@ from django.utils import timezone
 from decimal import Decimal
 import requests
 
+from . import settings
 from .. import models
 from .. import app_settings
 
@@ -11,7 +12,7 @@ class CodecovDataRetriever(object):
 
     def __init__(self, datetime=timezone.now()):
 
-        resp = requests.get(app_settings.CODECOV_BASE_URL)
+        resp = requests.get(settings.CODECOV_BASE_URL)
         report = resp.json()["report"]
 
         models.Codecov.objects.create(
@@ -24,7 +25,7 @@ class CodecovDataRetriever(object):
             files=len(report["files"].keys()),
             datetime=datetime)
 
-        for appname in app_settings.FOLLOWED_APPS:
+        for app_name in app_settings.FOLLOWED_APPS:
             hit = 0
             partial = 0
             branches = 0
@@ -34,7 +35,7 @@ class CodecovDataRetriever(object):
             round_ = Decimal(".01")
 
             for filename, report in report["files"].items():
-                if filename.statswith(appname):
+                if filename.statswith(app_name):
                     hit += report["totals"]["hit"]
                     partial += report["totals"]["partial"]
                     branches += report["totals"]["branches"]
@@ -50,5 +51,5 @@ class CodecovDataRetriever(object):
                 lines=lines,
                 missed=missed,
                 files=files,
-                django_app=appname,
+                app_name=app_name,
                 datetime=datetime)

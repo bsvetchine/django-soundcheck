@@ -1,16 +1,20 @@
 from . import app_settings
 
-if app_settings.ENABLE_GIT:
-    from .instruments.git.models import *
 
 if app_settings.ENABLE_CODECOV:
-    from .instruments.codecov.models import *
+    from .codecov.models import *
 
-if app_settings.ENABLE_SENTRY:
-    from .instruments.sentry.models import *
+if app_settings.ENABLE_GIT:
+    from .git.models import *
 
 if app_settings.ENABLE_PIVOTAL:
-    from .instruments.pivotal.models import *
+    from .pivotal.models import *
+
+if app_settings.ENABLE_PROSPECTOR:
+    from .prospector.models import *
+
+if app_settings.ENABLE_SENTRY:
+    from .sentry.models import *
 
 if app_settings.ENABLE_ZENDESK:
-    from .instruments.zendesk.models import *
+    from .zendesk.models import *

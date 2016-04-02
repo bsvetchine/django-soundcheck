@@ -2,6 +2,7 @@ from django.utils import timezone
 
 import requests
 
+from . import settings
 from .. import models
 from .. import app_settings
 
@@ -23,8 +24,8 @@ class PivotalDataRetriever(object):
     def __init__(self, datetime=timezone.now()):
 
         resp = requests.get(
-            app_settings.PIVOTAL_API_URL,
-            headers=app_settings.PIVOTAL_API_HEADERS)
+            settings.PIVOTAL_API_URL,
+            headers=settings.PIVOTAL_API_HEADERS)
 
         stories = resp.json()
         total_points, nb_stories_by_type, nb_stories_by_state = (
@@ -44,11 +45,11 @@ class PivotalDataRetriever(object):
             nb_unstarted_stories=nb_stories_by_state["unstarted"],
             datetime=datetime)
 
-        for appname in app_settings.FOLLOWED_APPS:
+        for app_name in app_settings.FOLLOWED_APPS:
             app_stories = []
             for story in stories:
                 for label in story["labels"]:
-                    if label["name"] == appname:
+                    if label["name"] == app_name:
                         app_stories.append(story)
 
             total_points, nb_stories_by_type, nb_stories_by_state = (
@@ -66,5 +67,5 @@ class PivotalDataRetriever(object):
                 nb_rejected_stories=nb_stories_by_state["rejected"],
                 nb_started_stories=nb_stories_by_state["started"],
                 nb_unstarted_stories=nb_stories_by_state["unstarted"],
-                django_app=appname,
+                app_name=app_name,
                 datetime=datetime)

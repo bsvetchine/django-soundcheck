@@ -3,7 +3,7 @@ from django.db import models
 
 class SoundcheckBaseModel(models.Model):
     """."""
-    django_app = models.TextField()
+    app_name = models.TextField()
     datetime = models.DateTimeField()
 
     class Meta:

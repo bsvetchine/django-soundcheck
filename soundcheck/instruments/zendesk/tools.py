@@ -2,6 +2,7 @@ from django.utils import timezone
 
 import requests
 
+from . import settings
 from .. import models
 from .. import app_settings
 
@@ -21,8 +22,8 @@ class ZendeskDataRetriever(object):
     def __init__(self, datetime=timezone.now()):
 
         resp = requests.get(
-            app_settings.ZENDESK_API_URL,
-            auth=(app_settings.ZENDESK_LOGIN, app_settings.ZENDESK_PASSWORD))
+            settings.ZENDESK_API_URL,
+            auth=(settings.ZENDESK_LOGIN, settings.ZENDESK_PASSWORD))
 
         tickets = resp.json()["results"]
         nb_tickets_by_priority, nb_tickets_by_status = self.identify_tickets(
@@ -40,10 +41,10 @@ class ZendeskDataRetriever(object):
             nb_hold_tickets=nb_tickets_by_status["hold"],
             datetime=datetime)
 
-        for appname in app_settings.FOLLOWED_APPS:
+        for app_name in app_settings.FOLLOWED_APPS:
             app_tickets = []
             for ticket in tickets:
-                if appname in ticket["tags"]:
+                if app_name in ticket["tags"]:
                     app_tickets.append(ticket)
 
             nb_stories_by_type, nb_stories_by_state = self.identify_tickets(
@@ -59,5 +60,5 @@ class ZendeskDataRetriever(object):
                 nb_open_tickets=nb_tickets_by_status["open"],
                 nb_pending_tickets=nb_tickets_by_status["pending"],
                 nb_hold_tickets=nb_tickets_by_status["hold"],
-                django_app=appname,
+                app_name=app_name,
                 datetime=datetime)

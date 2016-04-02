@@ -1,10 +1,11 @@
+import os.path
 import os.walk
 
 from django.utils import timezone
 
 from git import Repo
 
-from . import models
+from .. import models
 from .. import app_settings
 
 
@@ -20,9 +21,9 @@ class GitDataRetriever(object):
         directories = []
         for root, directories, filenames in os.walk(git_repo_path):
             for directory in directories:
-                directories.append(root, directory)
+                directories.append(os.path.join(root, directory))
             for filename in filenames:
-                files.append(root, filename)
+                files.append(os.path.join(root, filename))
 
         nb_lines = 0
         for file in files:
@@ -34,7 +35,7 @@ class GitDataRetriever(object):
             nb_files=len(files),
             nb_directories=len(directories),
             nb_commits=repo.commit(git_main_branch).count(),
-            date=datetime
+            datetime=datetime
         )
 
         for appname in app_settings.FOLLOWED_APPS:
@@ -54,4 +55,4 @@ class GitDataRetriever(object):
                 nb_directories=len(app_directories),
                 nb_commits=repo.commit(git_main_branch).count(appname),
                 django_app=appname,
-                date=datetime)
+                datetime=datetime)

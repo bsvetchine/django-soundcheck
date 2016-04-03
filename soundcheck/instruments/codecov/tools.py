@@ -4,8 +4,8 @@ from decimal import Decimal
 import requests
 
 from . import settings
-from .. import models
-from .. import app_settings
+from ... import models
+from ... import app_settings
 
 
 class CodecovDataRetriever(object):

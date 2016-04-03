@@ -1,6 +1,6 @@
 from django.db import models
 
-from .. import mixins
+from ... import mixins
 
 
 class Git(mixins.SoundcheckBaseModel):

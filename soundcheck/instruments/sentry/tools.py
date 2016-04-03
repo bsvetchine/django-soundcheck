@@ -3,8 +3,8 @@ from django.utils import timezone
 import requests
 
 from . import settings
-from .. import models
-from .. import app_settings
+from ... import models
+from ... import app_settings
 
 
 class SentryDataRetriever(object):

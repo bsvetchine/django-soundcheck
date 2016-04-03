@@ -6,8 +6,8 @@ from django.utils import timezone
 from git import Repo
 
 from . import settings
-from .. import models
-from .. import app_settings
+from ... import models
+from ... import app_settings
 
 
 class GitDataRetriever(object):

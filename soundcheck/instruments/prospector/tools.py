@@ -2,9 +2,9 @@ import subprocess
 
 from django.utils import timezone
 
-from .. import models
-from .. import app_settings
 from . import settings
+from ... import models
+from ... import app_settings
 
 
 class ProspectorDataRetriever(object):

@@ -1,9 +1,9 @@
 from django.db import models
 
-from .. import mixins
+from ... import mixins
 
 
-class Sendesk(mixins.SoundcheckBaseModel):
+class Zendesk(mixins.SoundcheckBaseModel):
     """Store git data."""
     nb_tickets = models.PositiveIntegerField()
     nb_urgent_tickets = models.PositiveIntegerField()

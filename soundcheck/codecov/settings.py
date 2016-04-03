@@ -3,10 +3,10 @@ import requests
 from django.conf import settings
 
 
-CODECOV_SERVICE = settings.get("CODEDOV_SERVICE")
-CODEDOV_USERNAME = settings.get("CODEDOV_USERNAME")
-CODECOV_API_TOKEN = settings.get("CODECOV_API_TOKEN")
-CODECOV_REPO_NAME = settings.get("CODEDOV_REPO_NAME")
+CODECOV_SERVICE = getattr(settings, "CODEDOV_SERVICE")
+CODEDOV_USERNAME = getattr(settings, "CODEDOV_USERNAME")
+CODECOV_API_TOKEN = getattr(settings, "CODECOV_API_TOKEN")
+CODECOV_REPO_NAME = getattr(settings, "CODEDOV_REPO_NAME")
 
 ENABLE_CODECOV = True if CODECOV_SERVICE and CODEDOV_USERNAME else False
 

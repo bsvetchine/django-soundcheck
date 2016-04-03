@@ -1,8 +1,8 @@
 from django.conf import settings
 
 
-GIT_REPO_PATH = settings.get("GIT_REPO_PATH")
-GIT_MAIN_BRANCH = settings.get("GIT_MAIN_BRANCH", "master")
+GIT_REPO_PATH = getattr(settings, "GIT_REPO_PATH")
+GIT_MAIN_BRANCH = getattr(settings, "GIT_MAIN_BRANCH", "master")
 ENABLE_GIT = True if GIT_REPO_PATH else False
 
 if ENABLE_GIT:

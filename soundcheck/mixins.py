@@ -7,6 +7,6 @@ class SoundcheckBaseModel(models.Model):
     datetime = models.DateTimeField()
 
     class Meta:
-        get_latest_by = 'date'
-        ordering = ('-date',)
+        get_latest_by = 'datetime'
+        ordering = ('-datetime',)
         abstract = True

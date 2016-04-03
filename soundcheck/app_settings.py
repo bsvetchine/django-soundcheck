@@ -8,4 +8,4 @@ from .sentry.settings import ENABLE_SENTRY
 from .zendesk.settings import ENABLE_ZENDESK
 
 
-FOLLOWED_APPS = getattr("FOLLOWED_APPS", settings, ())
+FOLLOWED_APPS = getattr(settings, "FOLLOWED_APPS", ())

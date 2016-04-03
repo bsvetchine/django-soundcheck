@@ -29,7 +29,7 @@ if ENABLE_SENTRY:
             org=SENTRY_ORGANIZATION_SLUG, proj=SENTRY_PROJECT_SLUG)
     )
     resp = requests.get(SENTRY_API_URL, headers=SENTRY_API_HEADERS)
-    if not resp.status_code != 200:
+    if resp.status_code != 200:
         raise Exception(
             "Unable to retrieve Sentry data (status_code={status_code}). "
             "Please check the following settings : "

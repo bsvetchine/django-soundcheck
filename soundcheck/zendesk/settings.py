@@ -28,7 +28,7 @@ if ENABLE_ZENDESK:
     )
     resp = requests.get(ZENDESK_API_URL,
                         auth=(ZENDESK_LOGIN, ZENDESK_PASSWORD))
-    if not resp.status_code != 200:
+    if resp.status_code != 200:
         raise Exception(
             "Unable to retrive Zendesk data (status_code={status_code}). "
             "Please check the following settings : "

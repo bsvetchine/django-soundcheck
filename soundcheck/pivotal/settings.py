@@ -25,7 +25,7 @@ if ENABLE_PIVOTAL:
             filter=PIVOTAL_STORIES_FILTER)
     )
     resp = requests.get(PIVOTAL_API_URL, headers=PIVOTAL_API_HEADERS)
-    if not resp.status_code != 200:
+    if resp.status_code != 200:
         raise Exception(
             "Unable to retrive Pivotal data (status_code={status_code}). "
             "Please check the following settings : "

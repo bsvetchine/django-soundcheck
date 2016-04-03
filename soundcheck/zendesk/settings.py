@@ -3,11 +3,16 @@ from django.conf import settings
 import requests
 
 
-ZENDESK_LOGIN = getattr(settings, "ZENDESK_LOGIN")
-ZENDESK_PASSWORD = getattr(settings, "ZENDESK_PASSWORD")
+# User configurable settings
+
+ZENDESK_LOGIN = getattr(settings, "ZENDESK_LOGIN", None)
+ZENDESK_PASSWORD = getattr(settings, "ZENDESK_PASSWORD", None)
 ZENDESK_TICKET_STATUSES_FILTER = getattr(
     settings, "ZENDESK_TICKET_STATUSES_FILTER",
     ("new", "open", "pending", "hold"))
+
+
+# Internal settings and connection check
 
 ENABLE_ZENDESK = True if ZENDESK_LOGIN and ZENDESK_PASSWORD else False
 

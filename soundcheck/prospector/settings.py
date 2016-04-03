@@ -1,8 +1,13 @@
 from django.conf import settings
 
 
-PROSPECTOR_PROJECT_PATH = getattr(settings, "PROSPECTOR_PROJECT_PATH")
+# User configurable settings
+
+PROSPECTOR_PROJECT_PATH = getattr(settings, "PROSPECTOR_PROJECT_PATH", None)
 PROSPECTOR_STRICTNESS = getattr(settings, "PROSPECTOR_STRICTNESS", "medium")
+
+
+# Internal settings and install check
 
 ENABLE_PROSPECTOR = True if PROSPECTOR_PROJECT_PATH else False
 

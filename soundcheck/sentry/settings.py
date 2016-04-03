@@ -5,9 +5,14 @@ from django.conf import settings
 import requests
 
 
-SENTRY_API_TOKEN = getattr(settings, "SENTRY_API_TOKEN")
-SENTRY_ORGANIZATION_SLUG = getattr(settings, "SENTRY_ORGANIZATION_SLUG")
-SENTRY_PROJECT_SLUG = getattr(settings, "SENTRY_PROJECT_SLUG")
+# User configurable settings
+
+SENTRY_API_TOKEN = getattr(settings, "SENTRY_API_TOKEN", None)
+SENTRY_ORGANIZATION_SLUG = getattr(settings, "SENTRY_ORGANIZATION_SLUG", None)
+SENTRY_PROJECT_SLUG = getattr(settings, "SENTRY_PROJECT_SLUG", None)
+
+
+# Internal settings and connection check
 
 ENABLE_SENTRY = True if SENTRY_API_TOKEN else False
 

@@ -3,11 +3,16 @@ from django.conf import settings
 import requests
 
 
-PIVOTAL_API_TOKEN = getattr(settings, "PIVOTAL_API_TOKEN")
-PIVOTAL_PROJECT_ID = getattr(settings, "PIVOTAL_PROJECT_ID")
+# User configurable settings
+
+PIVOTAL_API_TOKEN = getattr(settings, "PIVOTAL_API_TOKEN", None)
+PIVOTAL_PROJECT_ID = getattr(settings, "PIVOTAL_PROJECT_ID", None)
 PIVOTAL_STORIES_FILTER = getattr(
     settings, "PIVOTAL_STORIES_FILTER",
     "state:delivered,finished,rejected,started,unstarted")
+
+
+# Internal settings and connection check
 
 ENABLE_PIVOTAL = True if PIVOTAL_API_TOKEN and PIVOTAL_PROJECT_ID else False
 

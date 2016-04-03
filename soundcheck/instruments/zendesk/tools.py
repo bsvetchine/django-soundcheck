@@ -11,7 +11,7 @@ class ZendeskDataRetriever(object):
 
     def identify_tickets(self, tickets):
         nb_tickets_by_priority = {"urgent": 0, "high": 0, "normal": 0,
-                                  "low": 0}
+                                  "low": 0, None: 0}
         nb_tickets_by_status = {"new": 0, "open": 0, "pending": 0, "hold": 0}
 
         for ticket in tickets:

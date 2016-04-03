@@ -1,3 +1,4 @@
+import json
 import subprocess
 
 from django.utils import timezone
@@ -16,14 +17,15 @@ class ProspectorDataRetriever(object):
                               settings.PROSPECTOR_STRICTNESS],
                              stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         out, err = p.communicate()
+        data = json.loads(out)
 
         models.Prospector.objects.create(
-            nb_messages=out["summary"]["message_count"],
+            nb_messages=data["summary"]["message_count"],
             datetime=datetime)
 
         for app_name in app_settings.FOLLOWED_APPS:
             nb_app_messages = 0
-            for message in out["messages"]:
+            for message in data["messages"]:
                 if message["location"]["path"].startswith(app_name):
                     nb_app_messages += 1
 

@@ -8,3 +8,4 @@ class Git(mixins.SoundcheckBaseModel):
     nb_commits = models.PositiveIntegerField()
     nb_files = models.PositiveIntegerField()
     nb_lines = models.PositiveIntegerField()
+    nb_dirs = models.PositiveIntegerField()

@@ -41,6 +41,7 @@ if app_settings.ENABLE_GIT:
             ('nb_commits', models.PositiveIntegerField()),
             ('nb_files', models.PositiveIntegerField()),
             ('nb_lines', models.PositiveIntegerField()),
+            ('nb_dirs', models.PositiveIntegerField()),
         ],
         options={
             'ordering': ('-datetime',),

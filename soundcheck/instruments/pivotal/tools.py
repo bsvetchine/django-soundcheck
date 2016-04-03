@@ -18,7 +18,8 @@ class PivotalDataRetriever(object):
         for story in stories:
             nb_stories_by_type[story["story_type"]] += 1
             nb_stories_by_state[story["current_state"]] += 1
-            total_points += story["estimate"]
+            total_points += story.get("estimate", 0)
+
         return total_points, nb_stories_by_type, nb_stories_by_state
 
     def __init__(self, datetime=timezone.now()):

@@ -34,13 +34,13 @@ class CodecovDataRetriever(object):
             files = 0
             round_ = Decimal(".01")
 
-            for filename, report in report["files"].items():
-                if filename.statswith(app_name):
-                    hit += report["totals"]["hit"]
-                    partial += report["totals"]["partial"]
-                    branches += report["totals"]["branches"]
-                    lines += report["totals"]["lines"]
-                    missed += report["totals"]["missed"]
+            for filename, filereport in report["files"].items():
+                if filename.startswith(app_name):
+                    hit += filereport["totals"]["hit"]
+                    partial += filereport["totals"]["partial"]
+                    branches += filereport["totals"]["branches"]
+                    lines += filereport["totals"]["lines"]
+                    missed += filereport["totals"]["missed"]
                     files += 1
 
             models.Codecov.objects.create(

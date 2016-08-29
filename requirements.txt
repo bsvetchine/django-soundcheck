@@ -1,2 +1,7 @@
 Django
 requests
+
+# Optional requirements :
+
+# gitpython
+# prospector
